@@ -1,0 +1,72 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # vagrant cachier settings
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  # Guest Additions自動更新無効
+#  config.vbguest.auto_update = false
+  config.vbguest.auto_update = true
+
+  # ホスト名・OSの設定
+  config.vm.box = "CentOS7"
+  config.vm.box_url = "https://github.com/tommy-muehle/puppet-vagrant-boxes/releases/download/1.1.0/centos-7.0-x86_64.box"
+  config.vm.hostname = "local.codei-test.jp"
+
+  # 接続IPの設定
+  config.vm.network "private_network", ip: "192.168.33.11"
+
+  # ポートの設定
+  #config.vm.network "forwarded_port", guest: 80, host: 2223
+
+  config.ssh.insert_key = false
+
+  # 共有ディレクトリの設定
+#  config.vm.synced_folder "../../codei-test", "/var/www",
+#  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/codei-test", "/var/www",
+  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/mbcodei", "/var/www",
+  	:owner => "apache",
+#  	:owner => "vagrant",
+	:group => "apache",
+	:mount_options => ["dmode=755,fmode=775"]
+
+  #メモリ割り当て
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+  #Chefの最新バージョンインストール
+  config.omnibus.chef_version = :latest
+
+  #必要な環境のインストール
+  config.vm.provision :chef_solo do |chef|
+    chef.log_level = :debug
+    chef.cookbooks_path = "./cookbooks"
+    chef.run_list = [
+        "recipe[locale::default]",
+        "recipe[lapp::httpd]",
+        "recipe[lapp::psql]",
+        "recipe[lapp::php]"
+    ]
+  end
+
+  # 共有ディレクトリがマウントされてない状態でhttpdを起動しようとして失敗するのを防ぐ
+  config.vm.provision :shell, run: "always", :inline => <<-EOT
+      sudo service httpd restart
+  EOT
+end
