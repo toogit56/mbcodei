@@ -58,7 +58,7 @@ class Mbtest extends CI_Controller {
 		$data['page_title'] = 'form01';
 		
 
-		echo ENVIRONMENT;
+		echo 'Environment:' . ENVIRONMENT;
 		
 		// エラーメッセージ用ラベル言語ファイルをロード
 		$this->lang->load('mbtest_lang');
