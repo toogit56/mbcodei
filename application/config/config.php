@@ -20,10 +20,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | development and MUST NOT be used in production!
 |
 | If you need to allow multiple domains, remember that this file is still
-| a PHP script and you can easily do that on your own.
+| a PHP script and you can easily do that on your own
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://local.codei-test.jp/';
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,8 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+//$config['language']	= 'english';
+$config['language']	= 'japanese';
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +115,7 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = 'Mb_';
 
 /*
 |--------------------------------------------------------------------------
@@ -213,7 +214,8 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+//$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
