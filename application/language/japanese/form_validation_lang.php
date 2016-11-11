@@ -38,3 +38,9 @@ $lang['form_validation_greater_than']		= '{field}欄は{param}より大きい値
 $lang['form_validation_greater_than_equal_to']	= '{field}欄は{param}以上の値でなければいけません。';
 $lang['form_validation_error_message_not_set']	= '{field}欄に適切なエラーメッセージがありません';
 $lang['form_validation_in_list']		= '{field}欄は{param}のいずれかでなければなりません';
+
+$lang['form_validation_single']	= '{field}欄は半角文字のみです';
+$lang['form_validation_double']	= '{field}欄は全角文字のみです';
+$lang['form_validation_hiragana']	= '{field}欄はひらがな文字のみです';
+$lang['form_validation_katakana']	= '{field}欄はカタカナ文字のみです';
+$lang['form_validation_single_katakana']	= '{field}欄は半角カタカナ文字のみです';

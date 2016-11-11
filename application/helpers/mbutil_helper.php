@@ -1,8 +1,10 @@
 <?php
 
-function mbexception($log_msg, $show_msg, $dumpvar = array()) {
+function mbexception($log_msg, $show_msg = '', $dumpvar = array()) {
+    $d = debug_backtrace();
+    $msg = 'file:'.$d[0]['file'].' line:'.$d[0]['line']. ' msg:'.$log_msg;
 
-    log_message('error', $log_msg);
+    log_message('error', $msg);
     
     if(is_array($dumpvar)) {
         foreach($dumpvar as $key => $dvar) {
