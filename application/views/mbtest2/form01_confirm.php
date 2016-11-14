@@ -8,6 +8,8 @@
 
 <?php echo form_open('mbtest2/form01_commit', null, $posts); ?>
 
+<?php echo form_transaction_token(); ?>
+
  <?php echo form_label('タイトル', 'title'); ?>
  <?php echo form_prep($title); ?> <br />
 
