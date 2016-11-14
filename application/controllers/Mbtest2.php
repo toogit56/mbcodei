@@ -1,10 +1,12 @@
 <?php
 
-class Mbtest2 extends CI_Controller {
+class Mbtest2 extends Mb_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('mbtest_model');
 		$this->load->helper('url_helper');
+
+		$this->load->library('session');
 	}
 	
 	// フォームの設定
@@ -85,6 +87,11 @@ class Mbtest2 extends CI_Controller {
 			);
 		}
 		else {
+			// トークンチェック
+			if( ! $this->check_token()) {
+				mbexception('token error', $this->lang->line('mbtest_invalid_token'));
+			}
+
 			// 確定
 			$this->load->view('mbtest2/form01_finish', $data);
 		}
