@@ -1,6 +1,5 @@
 <?php
 
-
 if ( ! function_exists('form_transaction_token'))
 {
 	/**

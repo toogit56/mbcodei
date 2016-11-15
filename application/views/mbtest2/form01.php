@@ -2,7 +2,7 @@
 <?php echo $page_title; ?>
 </h2>
 
-
+ <?php echo 'screen_form01'; ?>
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('mbtest2/form01_confirm'); ?>

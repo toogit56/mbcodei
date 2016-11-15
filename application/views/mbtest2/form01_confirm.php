@@ -4,6 +4,7 @@
 </h2>
 
 
+ <?php echo 'screen_form01_confirm'; ?>
  <?php echo validation_errors(); ?>
 
 <?php echo form_open('mbtest2/form01_commit', null, $posts); ?>
