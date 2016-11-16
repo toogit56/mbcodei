@@ -12,3 +12,6 @@ vendor/
 composer.phar
 application/logs
 *.swp
+public/phpmyadmin
+public/phpMyAdmin*
+public/coverage

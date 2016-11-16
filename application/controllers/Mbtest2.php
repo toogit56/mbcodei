@@ -97,6 +97,17 @@ class Mbtest2 extends Mb_Controller {
 		}
 		
 		var_dump($data['posts']);
+
+		$this->db->trans_start();
+        if( ! $this->mbtest_model->set_news($data['posts'])) {
+        	$this->db->trans_rollback();
+
+			mbexception(
+				'Newsデータ挿入エラー'
+			);
+		}
+
+        $this->db->trans_commit();
 	}
 }
 
