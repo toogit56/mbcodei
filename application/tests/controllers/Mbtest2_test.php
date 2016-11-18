@@ -2,31 +2,27 @@
 
 class Mbtest2_test extends TestCase
 {
-    public static function setUpBeforeClass() {
-        parent::setUpBeforeClass();
-
-//        MonkeyPatch::patchConstant('ENVIRONMENT', 'development');
-//        echo ENVIRONMENT;
-//        echo "---------- setUpBeforeClass E:" . ENVIRONMENT;
-    }
-
-    public function setUp()
-    {
-        MonkeyPatch::patchConstant('ENVIRONMENT', 'development');
-//        echo "---------- setUp!!!!!! E:" . ENVIRONMENT;
-//        $this->resetInstance();
-    }
-
     public function test_form01() 
     {
-//        echo "---------- test_form01 E:" . ENVIRONMENT;
-
         $output = $this->request('GET', "mbtest2/form01");
 
 //echo $output;
 
         $this->assertContains('<h2>
 form01</h2>', $output);
+    }
+
+    public function test_form01_config_two()
+    {
+        /*
+        MonkeyPatch::patchMethod(
+            'Mbtest2',
+            array('config_one_two' => 2)
+        );
+        */
+
+        $output = $this->request('GET', "mbtest2/form01");
+        $this->assertContains('config_one_two -> 2', $output);
     }
 
     /*
@@ -55,7 +51,7 @@ form01</h2>', $output);
 
     public function test_form01_confirm_e02()
     {
-        $output = $this->request('POST', 'mbtest2/form01_confirm', ['title' => 'あいうえおか',
+        $output = $this->request('POST', 'mbtest2/form01_confirm', ['title' => 'あいうえおぐ',
             'text' => '１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６'
         ]);
 

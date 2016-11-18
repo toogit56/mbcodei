@@ -39,12 +39,20 @@ class Mbtest2 extends Mb_Controller {
 	private function validation_set_rules() {
 		// 検証ルールを設定
 		$this->form_validation->set_rules('title', 'lang:mbtest_title', 'required|max_length[5]|double');
+		$this->form_validation->set_rules('text', 'lang:mbtest_text', 'required|max_length[75]');
+
+
+		// 入力チェックを独自処理で実装。クロージャの例。
 		$this->form_validation->set_rules('title', 'lang:mbtest_title',
 			array(
-				// 入力チェックを独自処理で実装。クロージャの例。
+				'required',
+				'max_length[5]',
+				'double',
 				array(
 					'duplicate_slug',
 					function($value) {
+						if($value === "") { return true; }
+
 						$this->form_validation->set_message(
 							'duplicate_slug', 
 							$this->lang->line('mbtest_duplicate_slug')
@@ -52,7 +60,7 @@ class Mbtest2 extends Mb_Controller {
 
 						// slugの重複チェック
 						$obj = $this->mbtest_model->get_news($value);
-						if(is_null($obj)) {
+						if( ! is_null($obj)) {
 							return false;
 						}
 
@@ -61,7 +69,12 @@ class Mbtest2 extends Mb_Controller {
 				)
 			)
 		);
-		$this->form_validation->set_rules('text', 'lang:mbtest_text', 'required|max_length[75]');
+	}
+
+	private function config_one_two() {
+		$this->config->load('mbtest');
+
+		return $this->config->item('mbtest_one_two');
 	}
 
 	public function form01() {
@@ -69,6 +82,13 @@ class Mbtest2 extends Mb_Controller {
 
 		// フォームの設定
 		$this->setup_form($data);
+
+
+		// 設定変更のチェック例のための分岐
+		if($this->config_one_two() == 2) {
+			mbexception('debug config_one_two is 2', 'config_one_two -> 2');
+		}
+
 		
 		$this->load->view('mbtest2/form01', $data);
 	}
