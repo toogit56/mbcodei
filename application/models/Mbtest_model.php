@@ -21,7 +21,7 @@ class Mbtest_model extends CI_Model {
 	public function set_news($data) {
 		$this->load->helper('url');
 
-		$data['slug'] = url_title($data['slug'], 'dash', true);
+		$data['slug'] = rawurlencode(url_title($data['title'], 'dash', true));
 /*
 		$slug = url_title($this->input->post('title'), 'dash', true);
 var_dump($slug);

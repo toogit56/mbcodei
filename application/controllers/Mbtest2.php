@@ -39,6 +39,28 @@ class Mbtest2 extends Mb_Controller {
 	private function validation_set_rules() {
 		// 検証ルールを設定
 		$this->form_validation->set_rules('title', 'lang:mbtest_title', 'required|max_length[5]|double');
+		$this->form_validation->set_rules('title', 'lang:mbtest_title',
+			array(
+				// 入力チェックを独自処理で実装。クロージャの例。
+				array(
+					'duplicate_slug',
+					function($value) {
+						$this->form_validation->set_message(
+							'duplicate_slug', 
+							$this->lang->line('mbtest_duplicate_slug')
+						);
+
+						// slugの重複チェック
+						$obj = $this->mbtest_model->get_news($value);
+						if(is_null($obj)) {
+							return false;
+						}
+
+						return true;
+					}
+				)
+			)
+		);
 		$this->form_validation->set_rules('text', 'lang:mbtest_text', 'required|max_length[75]');
 	}
 
@@ -92,10 +114,22 @@ class Mbtest2 extends Mb_Controller {
 				mbexception('token error', $this->lang->line('mbtest_invalid_token'));
 			}
 
+			$this->db->trans_start();
+			if( ! $this->mbtest_model->set_news($data['posts'])) {
+				$this->db->trans_rollback();
+
+				mbexception(
+					'Newsデータ挿入エラー'
+				);
+			}
+
+			$this->db->trans_commit();
+
 			// 確定
 			$this->load->view('mbtest2/form01_finish', $data);
 		}
 		
+		/*
 		var_dump($data['posts']);
 
 		$this->db->trans_start();
@@ -108,6 +142,7 @@ class Mbtest2 extends Mb_Controller {
 		}
 
         $this->db->trans_commit();
+		*/
 	}
 }
 

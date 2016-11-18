@@ -5,6 +5,6 @@
  <div class="main">
   <?php echo $news_item['text']; ?>
  </div>
- <p><a href="<?php echo site_url('news/' . $news_item['slug']);?>">View article</p>
+ <p><a href="<?php echo site_url('mbtest/view/' . $news_item['slug']);?>">View article</a></p>
 
 <?php endforeach; ?>

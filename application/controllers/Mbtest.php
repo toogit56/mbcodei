@@ -18,6 +18,7 @@ class Mbtest extends CI_Controller {
 	}
 
 	public function view($slug = null) {
+//		$slug = rawurlencode($slug);
 		$data['news_item'] = $this->mbtest_model->get_news($slug);
 
 		if(empty($data['news_item'])) {
