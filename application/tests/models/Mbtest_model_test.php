@@ -32,18 +32,11 @@ a03')
 
         $t_news_array = $this->obj->get_news();
 
-        $this->CI->load->helper('mbdb');
-
- //       $real_count = mbdb_get_row_nums('news');
-
         $row = $this->CI->db->select('count(*) as num')
             ->from('news')
             ->get()->row();
 
         $this->assertEquals($row->num, count($t_news_array), '取得したデータ数が一致しません');
-
-//        $this->assertEquals(count($t_news_array), $real_count, '取得したデータ数が一致しません');
-        
     }
 
     public function test_set_news()
@@ -63,6 +56,8 @@ a03')
         $this->CI->db->trans_start();
         $this->obj->set_news($insert_item);
         $this->CI->db->trans_complete();
+
+        $slug = rawurlencode(url_title($slug, 'dash', true));
 
         $rows = $this->CI->db->select('slug, title, text')
             ->from('news')
