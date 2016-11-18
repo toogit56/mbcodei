@@ -14,6 +14,7 @@
 		"phpunit/phpunit": "^4.8",
 		"phpdocumentor/phpdocumentor": "*",
 		"phpdocumentor/graphviz": "1.*@beta",
-		"phpdocumentor/reflection-docblock": "~2.0@dev"
+		"phpdocumentor/reflection-docblock": "~2.0@dev",
+		"phpmd/phpmd": "^2.4"
 	}
 }

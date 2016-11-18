@@ -15,3 +15,5 @@ application/logs
 public/phpmyadmin
 public/phpMyAdmin*
 public/coverage
+tmp/
+application/database/migrations/

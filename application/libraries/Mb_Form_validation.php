@@ -21,7 +21,6 @@
  * @package
  * @subpackage Libraries
  * @category Validation
- * @author Copyright (c) 2011, AIDREAM.
  * @link
  */
 class Mb_Form_validation extends CI_Form_validation {
