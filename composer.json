@@ -12,9 +12,14 @@
 		"kenjis/ci-phpunit-test": "^0.12.2",
 		"kenjis/codeigniter-deployer": "1.0.x@dev",
 		"phpunit/phpunit": "^4.8",
+		"phpunit/dbunit": ">=1.2",
+		"phpunit/php-invoker": "^1.1",
+		"phpunit/phpunit-selenium": "1.*",
 		"phpdocumentor/phpdocumentor": "*",
 		"phpdocumentor/graphviz": "1.*@beta",
 		"phpdocumentor/reflection-docblock": "~2.0@dev",
-		"phpmd/phpmd": "^2.4"
+		"phpmd/phpmd": "^2.4",
+		"phake/phake": "2.*",
+		"zendframework/zendframework1": "^1.12"
 	}
 }

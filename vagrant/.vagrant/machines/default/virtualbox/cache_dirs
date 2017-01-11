@@ -1,5 +1,0 @@
-/var/chef/cache
-/home/vagrant/.gem/ruby/cache
-/opt/chef/embedded/lib/ruby/gems/2.1.0/cache
-/var/cache/yum
-/home/vagrant/.composer/cache

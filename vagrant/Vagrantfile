@@ -20,8 +20,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Guest Additions自動更新無効
-#  config.vbguest.auto_update = false
-  config.vbguest.auto_update = true
+  config.vbguest.auto_update = false
+#  config.vbguest.auto_update = true
 
   # ホスト名・OSの設定
   config.vm.box = "CentOS7"
@@ -39,11 +39,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 共有ディレクトリの設定
 #  config.vm.synced_folder "../../codei-test", "/var/www",
 #  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/codei-test", "/var/www",
-  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/mbcodei", "/var/www",
+#
+  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/mbcodei", "/var/www/",
   	:owner => "apache",
 #  	:owner => "vagrant",
 	:group => "apache",
 	:mount_options => ["dmode=755,fmode=775"]
+
+#  config.vm.synced_folder "/Users/PC-14110701-N/Documents/workspace/mbcodei",
+#  "/var/www",
+#  create: true,
+#  mount_options: %w(dmode=777 fmode=777)
 
   #メモリ割り当て
   config.vm.provider "virtualbox" do |vb|
