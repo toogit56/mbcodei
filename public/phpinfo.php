@@ -1,0 +1,6 @@
+<?php
+
+echo "AAAAA";
+
+
+phpinfo();
